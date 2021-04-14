@@ -1,32 +1,33 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-
+import './index.css'
 const App = (props) => {
   const comienzo =Math.floor(Math.random()*(props.anecdotas.length))
   const [selected, setSelected] = useState(comienzo)
   const [arreglo,setArreglo]=useState([0,0,0,0,0,0])
   const [mayor, setMayor] = useState(comienzo)
   return (
-    <div>
+    <div className="app">
       <h2>Anecdota del día</h2>
       {props.anecdotas[selected]}
       <br/>
-      has {arreglo[selected]} votes
+      <b>has {arreglo[selected]} votes</b>
       <br/>
-      <button onClick={()=>{
-          arreglo[selected]+=1
-          setArreglo(arreglo.slice())
-          setMayor(arreglo.indexOf(Math.max(...arreglo)))
-        }}>vote</button>
-      <button onClick={()=>{
-            setSelected(Math.floor(Math.random()*(props.anecdotas.length)))            
-            
-          }
-        }>Anecdota Aleatoria</button>
+      <div className="botones">
+        <button onClick={()=>{
+            arreglo[selected]+=1
+            setArreglo(arreglo.slice())
+            setMayor(arreglo.indexOf(Math.max(...arreglo)))
+          }}>vote</button>
+        <button onClick={()=>{
+              setSelected(Math.floor(Math.random()*(props.anecdotas.length)))
+            }
+          }>Anecdota Aleatoria</button>
+      </div>
       <h2>Anecdota con más votos</h2>
       {props.anecdotas[mayor]}
       <br/>
-      has {arreglo[mayor]} votes
+      <b>has {arreglo[mayor]} votes</b>
     </div>
   )
 }
