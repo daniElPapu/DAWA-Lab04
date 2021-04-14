@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const App = (props) => {
-  const [selected, setSelected] = useState(0)
+  const comienzo =Math.floor(Math.random()*(props.anecdotas.length))
+  const [selected, setSelected] = useState(comienzo)
   const [arreglo,setArreglo]=useState([0,0,0,0,0,0])
+  const [mayor, setMayor] = useState(comienzo)
   return (
     <div>
+      <h2>Anecdota del día</h2>
       {props.anecdotas[selected]}
       <br/>
       has {arreglo[selected]} votes
@@ -13,11 +16,17 @@ const App = (props) => {
       <button onClick={()=>{
           arreglo[selected]+=1
           setArreglo(arreglo.slice())
+          setMayor(arreglo.indexOf(Math.max(...arreglo)))
         }}>vote</button>
       <button onClick={()=>{
-            setSelected(Math.floor(Math.random()*(props.anecdotas.length)))
+            setSelected(Math.floor(Math.random()*(props.anecdotas.length)))            
+            
           }
         }>Anecdota Aleatoria</button>
+      <h2>Anecdota con más votos</h2>
+      {props.anecdotas[mayor]}
+      <br/>
+      has {arreglo[mayor]} votes
     </div>
   )
 }
