@@ -3,12 +3,21 @@ import ReactDOM from 'react-dom'
 
 const App = (props) => {
   const [selected, setSelected] = useState(0)
-
+  const [arreglo,setArreglo]=useState([0,0,0,0,0,0])
   return (
     <div>
       {props.anecdotas[selected]}
       <br/>
-      <button onClick={()=>setSelected(Math.floor(Math.random()*(props.anecdotas.length)))}>Anecdota Aleatoria</button>
+      has {arreglo[selected]} votes
+      <br/>
+      <button onClick={()=>{
+          arreglo[selected]+=1
+          setArreglo(arreglo.slice())
+        }}>vote</button>
+      <button onClick={()=>{
+            setSelected(Math.floor(Math.random()*(props.anecdotas.length)))
+          }
+        }>Anecdota Aleatoria</button>
     </div>
   )
 }
