@@ -10,9 +10,9 @@ const App = () => {
     <div>
       <h2>GIVE FEEDBACK</h2>
       <div className="botones">
-        <button onClick={()=>setGood(good+1)}>good</button>
-        <button onClick={()=>setNeutral(neutral+1)}>neutral</button>
-        <button onClick={()=>setBad(bad+1)}>bad</button>
+        <Button setState={setGood} state={good} name="good"/>
+        <Button setState={setNeutral} state={neutral} name="neutral"/>
+        <Button setState={setBad} state={bad} name="bad"/>
       </div>
       {(good>0||neutral>0||bad>0)?<Statistics good={good} neutral={neutral} bad={bad}/>:<p>No Feedback given</p>}
     </div>
@@ -23,14 +23,24 @@ const Statistics=({good, neutral,bad})=>{
     <>
       <h2>STATISTICS</h2>
       <div>
-        <p>good <span>{good}</span></p>
-        <p>neutral <span>{neutral}</span></p>
-        <p>bad <span>{bad}</span></p>
-        <p>all <span>{good+neutral+bad}</span></p>
-        <p>average <span>{(good*1+neutral*0+bad*-1)/(good+neutral+bad)}</span></p>
-        <p>positive <span>{good/(good+neutral+bad)*100}%</span></p>
+        <Statistic name="good" value={good}/>
+        <Statistic name="neutral" value={neutral}/>
+        <Statistic name="bad" value={bad}/>
+        <Statistic name="all" value={good+neutral+bad}/>
+        <Statistic name="average" value={(good*1+neutral*0+bad*-1)/(good+neutral+bad)}/>
+        <Statistic name="positive" value={good/(good+neutral+bad)*100+"%"}/>
       </div>
     </>)
+}
+const Button=({setState,state,name})=>{
+  return(
+    <button onClick={()=>setState(state+1)}>{name}</button>
+  )
+}
+const Statistic =({name,value})=>{
+  return(
+    <p>{name} <span>{value}</span></p>
+  )
 }
 
 ReactDOM.render(<App />, 
