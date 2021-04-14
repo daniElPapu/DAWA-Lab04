@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-
+import './index.css'
 const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
   return (
-    <div>
+    <div className="app">
       <h2>GIVE FEEDBACK</h2>
       <div className="botones">
         <Button setState={setGood} state={good} name="good"/>
@@ -22,7 +22,7 @@ const Statistics=({good, neutral,bad})=>{
   return (
     <>
       <h2>STATISTICS</h2>
-      <div>
+      <div className="estadisticas">
         <Statistic name="good" value={good}/>
         <Statistic name="neutral" value={neutral}/>
         <Statistic name="bad" value={bad}/>
